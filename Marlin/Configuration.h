@@ -43,7 +43,7 @@
   #define X_BED_SIZE 330
   #define Y_BED_SIZE 330
   #define Z_MAX_POS 400
-  #define CUSTOM_MACHINE_NAME "Tronxy X5SA V6 330 Titan TMC"
+  #define CUSTOM_MACHINE_NAME "AndTri3D"
 
 #elif V6_330_TITAN_NO_TMC
   #define MOTHERBOARD BOARD_CHITU3D_V6
@@ -889,9 +889,14 @@
  * Default Axis Steps Per Unit (steps/mm)
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
+ *  aus config-export 
+ * M8009 S0.006250;x,y - 1/0.006250 = 160
+ * M8010 S0.001250;z   - 1/0.001250 = 800
+ * M8011 S0.001262;e   - 1/0.001262 = 797.39302694136929
  */
+
 #if WITH_TMC && WITH_TITAN
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 800, 764 }
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 800, 797.39 }
 #elif WITH_TMC && !WITH_TITAN
   #define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 800, 186 }
 #elif WITH_TITAN && !WITH_TMC
@@ -1278,7 +1283,7 @@
 
 //#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed
 
-//#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
+#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
 #define Z_HOMING_HEIGHT  10      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
